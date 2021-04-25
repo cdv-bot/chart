@@ -2,22 +2,10 @@
 import axiosClient from './axiosClient';
 
 class ProductApi {
-  setAdd = (params) => {
-    const url = '/todolist';
+  login = (params) => {
+    const url = '/v2/auth';
     return axiosClient.post(url, params);
   };
-  getList = () => {
-    const url = '/todolist';
-    return axiosClient.get(url, {
-      params: {
-        _sort: 'time',
-        _order: 'desc',
-        _page: 1,
-        _limit: 7
-      }
-    });
-  };
-
 }
 const productApi = new ProductApi();
 export default productApi;
