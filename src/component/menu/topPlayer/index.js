@@ -3,10 +3,20 @@ import './style.scss';
 import imgPlayer from './../../../assets/image/top-derivative.bb0daf79.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faTimes } from '@fortawesome/free-solid-svg-icons';
-import cup from './../../../assets/image/cup.png';
-import cup1 from './../../../assets/image/cup1.png';
-import cup2 from './../../../assets/image/cup2.png';
-function index({ handlerCloseTop }) {
+import TopDerivative from './topDerivative';
+import useSWR from 'swr';
+import ListTopPlay from './listTopPlay';
+import TopDerivative2 from './topDerivative2';
+import ListTopPlay2 from './listTopPlay2';
+
+const fetcher = url => fetch(url).then(r => r.json())
+function TopAsset({ handlerCloseTop }) {
+
+  let link = 'https://dertrial-api.vndirect.com.vn/demotrade/assets';
+  const { data, error } = useSWR(link, fetcher, { refreshInterval: 5000 });
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+
   return (
     <div className='topPlayer'>
       <div className='cloneTop' onClick={handlerCloseTop}></div>
@@ -26,75 +36,10 @@ function index({ handlerCloseTop }) {
               <p>Đơn vị: VND</p>
             </div>
           </div>
-          <div className='player__left-tab'>
-            <img src={cup} alt='dá' />
-            <span>utcung_huhong1992</span>
-            <span>54,709,446</span>
-          </div>
-          <div className='player__left-tab'>
-            <img
-              src={cup1}
-              alt='dá'
-              style={{
-                height: '33px',
-                left: '-13px',
-                bottom: '-2px',
-              }}
-            />
-            <span>utcung_huhong1992</span>
-            <span>54,709,446</span>
-          </div>
-          <div className='player__left-tab'>
-            <img
-              src={cup2}
-              alt='dá'
-              style={{
-                height: '33px',
-                left: '-13px',
-                bottom: '-2px',
-              }}
-            />
-            <span>utcung_huhong1992</span>
-            <span>54,709,446</span>
-          </div>
+          <TopDerivative data={data} />
           <div className='player__left-list'>
             <ul>
-              <li>
-                <span>den123</span>
-                <span>48,412,955</span>
-              </li>
-              <li>
-                <span>den123</span>
-                <span>48,412,955</span>
-              </li>
-              <li>
-                <span>den123</span>
-                <span>48,412,955</span>
-              </li>
-              <li>
-                <span>den123</span>
-                <span>48,412,955</span>
-              </li>
-              <li>
-                <span>den123</span>
-                <span>48,412,955</span>
-              </li>
-              <li>
-                <span>den123</span>
-                <span>48,412,955</span>
-              </li>
-              <li>
-                <span>den123</span>
-                <span>48,412,955</span>
-              </li>
-              <li>
-                <span>den123</span>
-                <span>48,412,955</span>
-              </li>
-              <li>
-                <span>den123</span>
-                <span>48,412,955</span>
-              </li>
+              <ListTopPlay data={data} />
             </ul>
           </div>
           <button className='player__left-bt'>THAM GIA NGAY TẠI ĐÂY</button>
@@ -116,75 +61,11 @@ function index({ handlerCloseTop }) {
                   <p>Đơn vị: VND</p>
                 </div>
               </div>
-              <div className='list-header-ListTab'>
-                <div className='list-header-tab'>
-                  <span>maika2013</span>
-                  <span>53,143,954</span>
-                </div>
-                <div className='list-header-tab'>
-                  <span>maika2013</span>
-                  <span>53,143,954</span>
-                </div>
-                <div className='list-header-tab'>
-                  <span>maika2013</span>
-                  <span>53,143,954</span>
-                </div>
-              </div>
+              <TopDerivative2 data={data} />
             </div>
             <div className='player__right-fullTop'>
               <ul>
-                <li>
-                  <span>utcung_huhong1992</span>
-                  <span>50,614,412</span>
-                </li>
-                <li>
-                  <span>utcung_huhong1992</span>
-                  <span>50,614,412</span>
-                </li>
-                <li>
-                  <span>utcung_huhong1992</span>
-                  <span>50,614,412</span>
-                </li>
-                <li>
-                  <span>utcung_huhong1992</span>
-                  <span>50,614,412</span>
-                </li>
-                <li>
-                  <span>utcung_huhong1992</span>
-                  <span>50,614,412</span>
-                </li>
-                <li>
-                  <span>utcung_huhong1992</span>
-                  <span>50,614,412</span>
-                </li>
-                <li>
-                  <span>utcung_huhong1992</span>
-                  <span>50,614,412</span>
-                </li>
-                <li>
-                  <span>utcung_huhong1992</span>
-                  <span>50,614,412</span>
-                </li>
-                <li>
-                  <span>utcung_huhong1992</span>
-                  <span>50,614,412</span>
-                </li>
-                <li>
-                  <span>utcung_huhong1992</span>
-                  <span>50,614,412</span>
-                </li>
-                <li>
-                  <span>utcung_huhong1992</span>
-                  <span>50,614,412</span>
-                </li>
-                <li>
-                  <span>utcung_huhong1992</span>
-                  <span>50,614,412</span>
-                </li>
-                <li>
-                  <span>utcung_huhong1992</span>
-                  <span>50,614,412</span>
-                </li>
+                <ListTopPlay2 data={data} />
               </ul>
             </div>
           </div>
@@ -199,4 +80,4 @@ function index({ handlerCloseTop }) {
   );
 }
 
-export default index;
+export default TopAsset;

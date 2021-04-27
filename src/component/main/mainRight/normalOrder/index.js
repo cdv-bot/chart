@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import productApi from '../../../../apis/productsApi';
+import './style.scss';
+import ReactTooltip from "react-tooltip";
+
 
 function IndnormalOrder(props) {
   const [onValue, setOnValue] = React.useState({
     priceType: "",
     quantity: ""
   })
+  const refs = useRef();
+  const [listItem, setListItem] = React.useState(false);
   const handlerChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
-
     if (name === 'quantity') {
       if (!/\D/.test(value)) {
         setOnValue({
@@ -30,10 +34,38 @@ function IndnormalOrder(props) {
 
   }
 
-  const handlerOrder = (key) => {
+  const handlerOrder = async (key) => {
     const { priceType, quantity } = onValue;
-    productApi.sendOrder(quantity, priceType, key);
+    let a = await productApi.sendOrder(quantity, priceType, key)
   }
+
+  const handlerFocus = () => {
+    setListItem(true);
+  }
+
+  const handlerOutFocus = () => {
+    if (!listItem) {
+      setListItem(false);
+    }
+    if (onValue.priceType !== "") {
+      setListItem(false);
+    }
+  }
+
+
+  const handlerClick = async (data) => {
+
+    console.log(refs.current)
+    await setOnValue({
+      ...onValue,
+      priceType: data
+    })
+    await setListItem(false);
+    refs.current = null
+  }
+
+
+
   return (
     <div className="box3_input">
       <div className="radio">
@@ -74,8 +106,20 @@ function IndnormalOrder(props) {
             value={onValue.priceType}
             name='priceType'
             placeholder="Giá"
+            onFocus={handlerFocus}
             onChange={handlerChange}
+            onBlur={handlerOutFocus}
           />
+          {
+            listItem ? <div className="showSelect">
+              <span ref={refs} onClick={() => handlerClick("ATO")}>ATO</span>
+              <span onClick={() => handlerClick("ATC")}>ATC</span>
+              <span onClick={() => handlerClick("MTL")}>MTL</span>
+              <span onClick={() => handlerClick("MOK")}>MOK</span>
+              <span onClick={() => handlerClick("MAK")}>MAK</span>
+            </div> : null
+          }
+
         </div>
         <div className="item_input">
           <label htmlFor="khoiluong">Khối lượng:</label>
