@@ -5,6 +5,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
+import Control from "../control";
 
 class index extends Component {
   render() {
@@ -37,21 +38,7 @@ class index extends Component {
             </span>
           </div>
           <div className="icon_cn">
-            <FontAwesomeIcon
-              icon={faSyncAlt}
-              className="icon_ld"
-              style={{ cursor: "pointer" }}
-            />
-            <FontAwesomeIcon
-              icon={faExternalLinkAlt}
-              className="icon_ld"
-              style={{ cursor: "pointer", marginLeft: "10px" }}
-            />
-            <FontAwesomeIcon
-              icon={faMinus}
-              className="icon_ld"
-              style={{ cursor: "pointer" }}
-            />
+            <Control hider={false} />
           </div>
         </div>
 

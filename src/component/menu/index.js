@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.scss';
@@ -6,10 +6,22 @@ import logo from './../../assets/image/logo.svg';
 import { faTractor, faTrophy, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import TopPlayer from './topPlayer';
 import Cookies from 'js-cookie';
+import jwt_decode from "jwt-decode";
 
 function Menu() {
   const history = useHistory();
   const [closeTop, setCloseTop] = React.useState(false);
+  const [user, setUser] = React.useState(null);
+  let token = Cookies.get('accessToken');
+  useEffect(() => {
+    try {
+      let decoded = jwt_decode(token);
+      setUser(decoded.customerName);
+    } catch (error) {
+      history.goBack();
+    }
+  }, [token]);
+
 
   const handlerOpenTop = () => {
     setCloseTop(true);
@@ -76,7 +88,7 @@ function Menu() {
         </div>
         <div className='info_acc'>
           <FontAwesomeIcon icon={faUserAlt} />
-          <span>Đỗ An</span>
+          <span>{user}</span>
           <div className='logout' onClick={handlerLogout}>
             <span id='logout_home' style={{ cursor: 'pointer' }}>
               Logout

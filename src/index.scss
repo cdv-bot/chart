@@ -535,6 +535,7 @@ html {
       //table_bottom
       .table_bottom {
         padding-top: 8px;
+        position: relative;
         &-title {
           display: grid;
           grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
@@ -553,6 +554,15 @@ html {
           }
         }
         .list_count {
+          position: absolute;
+          overflow: auto;
+          top: 40px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          &::-webkit-scrollbar {
+            display: none;
+          }
           .item-list {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
@@ -566,6 +576,9 @@ html {
                 justify-self: end;
                 padding-right: 5px;
                 color: #ffffff;
+              }
+              &:first-child {
+                justify-self: center;
               }
             }
             &:nth-child(even) {
@@ -744,7 +757,6 @@ html {
             color: #777765;
 
             text-align: center;
-            padding-top: 20px;
           }
           .table_book1 {
             .box_book {
@@ -762,6 +774,9 @@ html {
                   color: #ffffff;
                   font-size: 1.3rem;
                   font-weight: 550;
+                  &:nth-of-type(5) {
+                    justify-self: start;
+                  }
                 }
               }
             }
@@ -840,6 +855,7 @@ html {
               margin-left: 5px;
               input {
                 margin: 0;
+                margin-right: 3px;
                 display: inline-block;
                 vertical-align: top;
               }
