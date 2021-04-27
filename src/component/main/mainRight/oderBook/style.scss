@@ -16,6 +16,14 @@
     // font-weight: bold;
   }
 
+  .comeinand {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    span {
+      justify-self: start;
+    }
+  }
   .code {
     font-size: 1.4rem;
     font-weight: 510;

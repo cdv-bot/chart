@@ -617,6 +617,7 @@ html {
         border-bottom: 1px solid #131722;
         .comeinand1 {
           // display: none;
+          height: 100%;
           &_title {
             display: grid;
             grid-template-columns: 4fr 1fr;
@@ -759,7 +760,10 @@ html {
             text-align: center;
           }
           .table_book1 {
+            position: relative;
+            height: 100%;
             .box_book {
+              // position: relative;
               height: 100%;
               width: 100%;
               .comeinand1_table {
@@ -777,6 +781,17 @@ html {
                   &:nth-of-type(5) {
                     justify-self: start;
                   }
+                }
+              }
+              .comeinand1_text {
+                position: absolute;
+                top: 35px;
+                left: 0;
+                right: 0;
+                overflow: auto;
+                bottom: 41px;
+                &::-webkit-scrollbar {
+                  display: none;
                 }
               }
             }

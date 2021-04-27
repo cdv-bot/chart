@@ -2,7 +2,7 @@ import React from 'react';
 import { faHourglassStart, faMinusCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function OrderInDay({ hasData }) {
-  console.log(hasData)
+
   return (
     <>
       <div className='box_book'>
@@ -19,10 +19,11 @@ function OrderInDay({ hasData }) {
               return (
                 <div key={index} className='comeinand1_text-list'>
                   <div className="comeinand">
-                    {
-                      value.status === 'PendingNew' ? <input type="checkbox" /> : null
-                    }
-
+                    <div>
+                      {
+                        value.status === 'PendingNew' || value.status === 'New' ? <input type="checkbox" /> : null
+                      }
+                    </div>
                     <span style={value.side === 'NB' ? { color: '#0FF200' } : null}>{
                       value.side === 'NS' ? 'Bán' : 'Mua'
                     }</span>
@@ -42,7 +43,7 @@ function OrderInDay({ hasData }) {
 
                     </div>
                     {
-                      value.status === 'PendingNew' ? <FontAwesomeIcon className="time" icon={faTimesCircle} /> : null
+                      value.status === 'PendingNew' || value.status === 'New' ? <FontAwesomeIcon className="time" icon={faTimesCircle} /> : null
                     }
 
                   </div>
