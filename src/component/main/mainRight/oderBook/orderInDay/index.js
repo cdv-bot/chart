@@ -10,6 +10,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import productApi from '../../../../../apis/productsApi';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 function OrderInDay({ hasData }) {
   const [showDel, setShowDel] = React.useState({
     check: false,
@@ -30,8 +31,31 @@ function OrderInDay({ hasData }) {
 
   const handlerYes = async () => {
 
-    productApi.delete(showDel.id);
-    setShowDel(false)
+    // productApi.delete(showDel.id);
+    let data = {
+      orderID: showDel.id,
+      userName: 'vipsuper99',
+    };
+    const config = {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    };
+    let url = "https://dertrial-api.vndirect.com.vn/demotrade/orders"
+    try {
+      setShowDel(false)
+      await axios(url, {
+        method: "DELETE",
+        data: data,
+        config,
+      })
+      toast.success("Đã xóa 🤷‍♂️");
+    } catch (er) {
+      toast.error("Không thể xóa 🤷‍♂️")
+    }
+
 
   }
 
@@ -76,7 +100,7 @@ function OrderInDay({ hasData }) {
                       />
                     ) : value.status === 'Rejected' ? (
                       <FontAwesomeIcon className='minus' icon={faMinusCircle} />
-                    ) : value.cancelable ? (
+                    ) : value.status === 'Cancelled' ? (
                       <FontAwesomeIcon
                         className='minus'
                         icon={faTrashAlt}

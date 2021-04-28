@@ -38,6 +38,10 @@ class ProductApi {
       'orderID': id
     });
   };
+  getLo = (prams) => {
+    const url = '/assets';
+    return axiosClient2.get(url, { prams });
+  };
 }
 const productApi = new ProductApi();
 export default productApi;

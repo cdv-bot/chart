@@ -7,7 +7,12 @@ import { faTractor, faTrophy, faUserAlt } from '@fortawesome/free-solid-svg-icon
 import TopPlayer from './topPlayer';
 import Cookies from 'js-cookie';
 import jwt_decode from "jwt-decode";
+import Clock from './clock.js';
+import Day from './day';
+import productApi from '../../apis/productsApi';
+import useSWR from 'swr';
 
+const fetcher = url => fetch(url).then(r => r.json())
 function Menu() {
   const history = useHistory();
   const [closeTop, setCloseTop] = React.useState(false);
@@ -35,15 +40,26 @@ function Menu() {
     Cookies.remove('accessToken');
     history.replace('/login');
   };
+
+  const [listData, setListData] = React.useState([]);
+  let decoded = jwt_decode(token);
+  const link = `https://dertrial-api.vndirect.com.vn/demotrade/assets?username=${decoded.username}`;
+
+
+  const { data, error } = useSWR(link, fetcher, { refreshInterval: 1000 });
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
   return (
     <div className='Menu'>
+
       {closeTop ? <TopPlayer handlerCloseTop={handlerCloseTop} /> : ''}
 
       <div className='Menu-left'>
         <img className='logo' src={logo} />
         <ul className='timer'>
-          <li id='nameTime'>15:19:29</li>
-          <li>2021/03/26</li>
+          <li id='nameTime'><Clock /></li>
+          <li> <Day /></li>
           <li>
             <NavLink
               exact
@@ -74,7 +90,7 @@ function Menu() {
               Hướng dẫn
             </NavLink>
           </li>
-          <li> Lãi/Lỗ: 0</li>
+          <li> Lãi/Lỗ: {data.cashOnHand}</li>
         </ul>
         <div className='top_person' onClick={handlerOpenTop}>
           <FontAwesomeIcon icon={faTrophy} />

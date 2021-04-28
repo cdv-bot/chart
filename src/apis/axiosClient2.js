@@ -2,9 +2,8 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 const axiosClient = axios.create({
-  baseURL: 'https://dertrial-api.vndirect.com.vn/demotrade/orders',
+  baseURL: 'https://dertrial-api.vndirect.com.vn/demotrade',
   headers: {
-    'Host': '<calculated when request is sent>',
     'content-Type': 'text/plain',
     "content-type": "application/json",
   },
