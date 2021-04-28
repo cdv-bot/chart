@@ -6,15 +6,14 @@ import cup2 from './../../../../assets/image/cup2.png';
 function TopDerivative({ data }) {
   let arrData = [...data];
   arrData.sort((x, y) => {
-    return y.netAssetValue - x.netAssetValue;
-  })
+    return y.totalPnlAmount - x.totalPnlAmount;
+  });
   // let list = data.slice(0, 20);
-
 
   function hasCodeMonny(data) {
     return data.toLocaleString('vi-VN', {
       style: 'currency',
-      currency: 'VND'
+      currency: 'VND',
     });
   }
   return (
@@ -22,7 +21,7 @@ function TopDerivative({ data }) {
       <div className='player__left-tab'>
         <img src={cup} alt='dá' />
         <span>{arrData[0].username}</span>
-        <span>{hasCodeMonny(arrData[0].netAssetValue)}</span>
+        <span>{hasCodeMonny(arrData[0].totalPnlAmount)}</span>
       </div>
       <div className='player__left-tab'>
         <img
@@ -35,7 +34,7 @@ function TopDerivative({ data }) {
           }}
         />
         <span>{arrData[1].username}</span>
-        <span>{hasCodeMonny(arrData[1].netAssetValue)}</span>
+        <span>{hasCodeMonny(arrData[1].totalPnlAmount)}</span>
       </div>
       <div className='player__left-tab'>
         <img
@@ -48,7 +47,7 @@ function TopDerivative({ data }) {
           }}
         />
         <span>{arrData[2].username}</span>
-        <span>{hasCodeMonny(arrData[2].netAssetValue)}</span>
+        <span>{hasCodeMonny(arrData[2].totalPnlAmount)}</span>
       </div>
     </>
   );

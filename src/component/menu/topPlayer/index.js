@@ -9,9 +9,8 @@ import ListTopPlay from './listTopPlay';
 import TopDerivative2 from './topDerivative2';
 import ListTopPlay2 from './listTopPlay2';
 
-const fetcher = url => fetch(url).then(r => r.json())
+const fetcher = (url) => fetch(url).then((r) => r.json());
 function TopAsset({ handlerCloseTop }) {
-
   let link = 'https://dertrial-api.vndirect.com.vn/demotrade/assets';
   const { data, error } = useSWR(link, fetcher, { refreshInterval: 5000 });
   if (error) return <div>failed to load</div>;

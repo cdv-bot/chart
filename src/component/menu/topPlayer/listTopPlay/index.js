@@ -5,7 +5,7 @@ function ListTopPlay({ data }) {
   arrData.sort((x, y) => {
     return y.netAssetValue - x.netAssetValue;
   })
-  console.log(arrData)
+
   let list = data.slice(3, 20);
   function hasCodeMonny(data) {
     return data.toLocaleString('vi-VN', {

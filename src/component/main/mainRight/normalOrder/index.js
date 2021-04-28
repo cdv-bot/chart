@@ -1,4 +1,6 @@
 import React, { useRef } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import productApi from '../../../../apis/productsApi';
 import './style.scss';
 
@@ -32,7 +34,16 @@ function IndnormalOrder(props) {
 
   const handlerOrder = async (key) => {
     const { priceType, quantity } = onValue;
-    let a = await productApi.sendOrder(quantity, priceType, key);
+    if (priceType.trim() === '' || quantity.trim() === '') {
+      toast.warning(
+        <h3 style={{ color: 'black' }}>Mời bạn nhập đầy đủ thông tin🙌</h3>
+      );
+    } else {
+      let data = await productApi.sendOrder(quantity, priceType, key);
+      if (data.status === 200) {
+        toast.success('Đã thành công 🎉');
+      }
+    }
   };
 
   const handlerFocus = () => {
