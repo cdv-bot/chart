@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { faExternalLinkAlt, faMinus, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-function Control({ hider, handlerHide }) {
+import { CounterContext } from './../../../main';
+function Control({ hider }) {
+  const counter = useContext(CounterContext);
   return (
     <>
       <div className='icon_cn'>
@@ -23,7 +25,7 @@ function Control({ hider, handlerHide }) {
           className='icon_ld'
           style={{ cursor: 'pointer' }}
           style={{ cursor: 'pointer' }}
-          onClick={handlerHide}
+          onClick={counter.handlerHide}
         />
       </div>
     </>

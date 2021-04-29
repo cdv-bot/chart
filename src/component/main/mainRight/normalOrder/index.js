@@ -10,6 +10,7 @@ function IndnormalOrder(props) {
     quantity: '',
   });
   const refs = useRef(true);
+  const checkbox = useRef(null);
   const [listItem, setListItem] = React.useState(false);
   const handlerChange = (e) => {
     const value = e.target.value;
@@ -33,6 +34,7 @@ function IndnormalOrder(props) {
   };
 
   const handlerOrder = async (key) => {
+
     const { priceType, quantity } = onValue;
     if (priceType.trim() === '' || quantity.trim() === '') {
       toast.warning(
@@ -42,6 +44,12 @@ function IndnormalOrder(props) {
       let data = await productApi.sendOrder(quantity, priceType, key);
       if (data.status === 200) {
         toast.success('Đã thành công 🎉');
+      }
+      if (!checkbox.current.checked) {
+        setOnValue({
+          priceType: '',
+          quantity: '',
+        });
       }
     }
   };
@@ -70,6 +78,8 @@ function IndnormalOrder(props) {
   const handlerOut = () => {
     refs.current = true;
   };
+
+
   return (
     <div className='box3_input'>
       <div className='radio'>
@@ -100,6 +110,7 @@ function IndnormalOrder(props) {
         <div className='item_input'>
           <label htmlFor='giadat'>Giá đặt:</label>
           <input
+            autocomplete="off"
             type='text'
             id='giadat'
             value={onValue.priceType}
@@ -128,6 +139,7 @@ function IndnormalOrder(props) {
         <div className='item_input'>
           <label htmlFor='khoiluong'>Khối lượng:</label>
           <input
+            autocomplete="off"
             type='text'
             value={onValue.quantity}
             id='khoiluong'
@@ -141,7 +153,7 @@ function IndnormalOrder(props) {
         <button onClick={() => handlerOrder('NB')}>MUA</button>
         <button onClick={() => handlerOrder('NS')}>BÁN</button>
         <label htmlFor='Luu'>
-          <input type='checkbox' name='check' id='Luu' />
+          <input type='checkbox' ref={checkbox} name='check' id='Luu' />
           Lưu lệnh
         </label>
       </div>

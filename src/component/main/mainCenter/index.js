@@ -1,10 +1,12 @@
 import React, { Component, useEffect } from 'react';
 import DerivativePrices from './derivativePrices';
 import useSWR from 'swr'
+import './style.scss';
 
 const fetcher = url => fetch(url).then(r => r.json())
 
 function MainCenter() {
+  const [changes, setChanges] = React.useState("");
   const [listData, setListData] = React.useState([]);
 
   let link = process.env.REACT_APP_API_DERIVATIVE;
@@ -16,6 +18,7 @@ function MainCenter() {
       setListData(data.data);
     }
   }, [data]);
+
   return (
     <>
       <div className="App__content-box2">
@@ -182,7 +185,7 @@ function MainCenter() {
                   <p>{value.code}</p>
                   <p>{value.open}</p>
                   <p>{value.change}</p>
-                  <p>{value.pctChange}</p>
+                  <p >{value.pctChange}</p>
                   <p>{value.nmVolume}</p>
                 </div>
               )

@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import productApi from '../../../../../apis/productsApi';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-function OrderInDay({ hasData }) {
+function OrderInDay({ hasData, userName }) {
   const [showDel, setShowDel] = React.useState({
     check: false,
     id: '',
@@ -34,7 +34,7 @@ function OrderInDay({ hasData }) {
     // productApi.delete(showDel.id);
     let data = {
       orderID: showDel.id,
-      userName: 'vipsuper99',
+      userName: { userName },
     };
     const config = {
       headers: {

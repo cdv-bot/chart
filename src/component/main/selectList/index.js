@@ -8,6 +8,7 @@ class index extends Component {
     };
   }
   handleList = (data) => {
+    this.props.handlerShow();
     this.props.handleListTask(data);
     this.setState({
       idList: data,

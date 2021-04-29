@@ -1,23 +1,23 @@
-.hasDelete{
+.hasDelete {
   display: flex;
   align-items: center;
 
-  button{
-    width: 40px;
-    font-size: 1.0rem;
+  button {
+    width: 35px;
+    font-size: 1rem;
     text-align: center;
-    font-weight:550 ;
+    font-weight: 550;
     border: none;
     border-radius: 2px;
     padding: 2px;
     cursor: pointer;
     color: white;
-    &:first-child{
-      background-color: #F7941D;
+    &:first-child {
+      background-color: #f7941d;
       margin-right: 2px;
     }
-    &:last-child{
-      background-color: #ACACAC;
+    &:last-child {
+      background-color: #acacac;
     }
   }
 }

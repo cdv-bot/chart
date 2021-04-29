@@ -31,7 +31,6 @@ class ProductApi {
     });
   };
   delete = (id) => {
-    console.log(id)
     const url = '';
     return axiosClient2.delete(url, {
       'userName': "vipsuper99",
