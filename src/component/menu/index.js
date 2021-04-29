@@ -42,7 +42,9 @@ function Menu() {
   };
 
   const [listData, setListData] = React.useState([]);
+
   let decoded = jwt_decode(token);
+
   const link = `https://dertrial-api.vndirect.com.vn/demotrade/assets?username=${decoded.username}`;
 
 

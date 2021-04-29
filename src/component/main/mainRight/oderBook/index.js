@@ -14,8 +14,15 @@ const fetcher = url => fetch(url).then(r => r.json())
 
 function OderBook() {
   const [listData, setListData] = React.useState([]);
-  let token = Cookies.get('accessToken');
+
+  try {
+    var token = Cookies.get('accessToken');
+
+  } catch (e) {
+    console.log("order")
+  }
   let decoded = jwt_decode(token);
+
   const link = `https://dertrial-api.vndirect.com.vn/demotrade/orders?username=${decoded.username}`;
 
 

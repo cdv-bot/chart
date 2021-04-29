@@ -42,7 +42,8 @@ function IndnormalOrder(props) {
       );
     } else {
       let data = await productApi.sendOrder(quantity, priceType, key);
-      if (data.status === 200) {
+
+      if (data?.status === 200) {
         toast.success('Đã thành công 🎉');
       }
       if (!checkbox.current.checked) {

@@ -5,8 +5,6 @@ import axiosClient1 from './axiosClient1';
 import axiosClient2 from './axiosClient2';
 import jwt_decode from "jwt-decode";
 
-let token = Cookies.get('accessToken');
-let decoded = jwt_decode(token);
 class ProductApi {
   login = (params) => {
     const url = '/v2/auth';
@@ -14,14 +12,22 @@ class ProductApi {
   };
   sendOrder = (quantity, priceType, side) => {
     const url = '/orders';
-    return axiosClient1.post(url, {
-      symbol: 'VN30F2105',
-      userName: decoded.username,
-      price: 0,
-      quantity: quantity,
-      priceType: priceType,
-      side: side
-    });
+    try {
+      let token = Cookies.get('accessToken');
+      let decoded = jwt_decode(token);
+      axiosClient1.post(url, {
+        symbol: 'VN30F2105',
+        userName: decoded.username,
+        price: 0,
+        quantity: quantity,
+        priceType: priceType,
+        side: side
+      });
+    } catch (e) {
+      console.log("Ád")
+    }
+
+
   };
   DeleteOrder = () => {
     const url = '/orders';
@@ -31,6 +37,7 @@ class ProductApi {
     });
   };
   delete = (id) => {
+
     const url = '';
     return axiosClient2.delete(url, {
       'userName': "vipsuper99",

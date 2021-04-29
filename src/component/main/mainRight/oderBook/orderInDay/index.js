@@ -55,8 +55,6 @@ function OrderInDay({ hasData, userName }) {
     } catch (er) {
       toast.error("Không thể xóa 🤷‍♂️")
     }
-
-
   }
 
   return (
